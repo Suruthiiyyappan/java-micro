@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stockmanager
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: stockmanager
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: stockmanager
+    spec:
+      containers:
+        - name: stockmanager
+          image: app642000.azurecr.io/{{ .Values.deployment.containers.image }}:{{ .Values.deployment.containers.tag }}
+          ports:
+            - containerPort: 8030
+          livenessProbe:
+            httpGet:
+              path: /stocks
+              port: 8030
+            initialDelaySeconds: 30
+            timeoutSeconds: 1

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: stockmanager
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: stockmanager
+spec:
+  type: ClusterIP
+  selector:
+    app: stockmanager
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8030
