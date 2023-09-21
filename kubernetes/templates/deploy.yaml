@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: stockmanager
-  namespace: {{ .Values.namespace }}
 spec:
   selector:
     matchLabels:
@@ -15,7 +14,7 @@ spec:
     spec:
       containers:
         - name: stockmanager
-          image: app642000.azurecr.io/{{ .Values.deployment.containers.image }}:{{ .Values.deployment.containers.tag }}
+          image: 642000/java:v1
           ports:
             - containerPort: 8030
           livenessProbe:
