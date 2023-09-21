@@ -5,7 +5,7 @@ metadata:
   labels:
     app: stockmanager
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: stockmanager
   ports:
