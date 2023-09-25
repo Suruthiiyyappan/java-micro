@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: stockmanager
-  namespace: sit
+  namespace: {{ .Values.namespace }}
 spec:
   selector:
     matchLabels:
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: stockmanager
-          image: ecrregis/java:latest
+          image: {{ .Values.image }}
           ports:
             - containerPort: 8030
           livenessProbe:
