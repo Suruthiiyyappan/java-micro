@@ -3,4 +3,4 @@ namespace: {__namespace__}
 deployment:
   containers:
     image: {__service-image-name__} 
-    tag: ${BUILD_ID}
+    tag: {__version__}
