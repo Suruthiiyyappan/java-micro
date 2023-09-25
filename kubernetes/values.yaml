@@ -1,6 +1,3 @@
 namespace: {__namespace__}
-
-deployment:
-  containers:
-    image: {__service-image-name__} 
-    tag: {__version__}
+image: {__service-image-name__} 
+tag: {__version__}
