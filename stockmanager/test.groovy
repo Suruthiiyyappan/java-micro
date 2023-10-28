@@ -1,5 +1,5 @@
 def mvnbuild(ENV) {
-    if (${ENV} == 'mule') {
+    if (ENV == 'mule') {
         sh 'mvn clean package'
         archiveJar()
     } else {
