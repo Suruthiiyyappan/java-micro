@@ -1,7 +1,7 @@
 def mvnbuild(ENV) {
     if (ENV == 'mule') {
         script {
-            def mvnHome = tool name: 'maven-3.9.5', type: 'Maven'
+            def mvnHome = tool name: 'apache-maven-3.9.5', type: 'Maven'
             def mvnCmd = "${mvnHome}/bin/mvn"
             sh "${mvnCmd} clean package"
             archiveJar()
