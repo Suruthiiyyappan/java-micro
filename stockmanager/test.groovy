@@ -5,7 +5,7 @@ def mvnbuild(ENV) {
             def mvnCmd = "/opt/apache-maven-3.9.5/bin/mvn"
             
             // Use withEnv to set the PATH environment variable
-            withEnv(["PATH+MAVEN=${mvnHome}/bin"]) {
+            withEnv(["PATH+MAVEN=/opt/apache-maven-3.9.5/bin"]) {
                 sh "${mvnCmd} clean package"
                 archiveJar()
             }
