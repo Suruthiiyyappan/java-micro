@@ -1,15 +1,20 @@
 def mvnbuild(ENV) {
     if (ENV == 'mule') {
         script {
-            def mvnHome = tool name: 'maven-3.9.5', type: 'Maven'
-            def mvnCmd = "${mvnHome}/bin/mvn"
-            sh "${mvnCmd} clean package"
-            archiveJar()
+            // def mvnHome = tool name: 'Maven-Name', type: 'Maven'
+            def mvnCmd = "/opt/apache-maven-3.9.5/bin/mvn"
+            
+            // Use withEnv to set the PATH environment variable
+            withEnv(["PATH+MAVEN=${mvnHome}/bin"]) {
+                sh "${mvnCmd} clean package"
+                archiveJar()
+            }
         }
     } else {
         echo 'not build'
     }
 }
+
 
 
 def archiveJar() {
