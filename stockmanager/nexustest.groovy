@@ -24,23 +24,8 @@ def nexus() {
 
     // Use withEnv to set the PATH environment variable
     withEnv(["PATH+MAVEN=/opt/apache-maven-3.9.5/bin"]) {
-            nexusArtifactUploader(
-                artifacts: [
-                    [
-                        artifactId: 'stockmanager',
-                        classifier: '',
-                        file: '/var/lib/jenkins/workspace/nexus/stockmanager/target/stockmanager-0.0.1-SNAPSHOT.jar',
-                        type: 'jar'
-                    ]
-                ],
-                credentialsId: 'nexus3',
-                groupId: 'uk.co.danielbryant.djshopping',
-                nexusUrl: 'http://3.99.33.174:8081',
-                nexusVersion: 'nexus3',
-                protocol: 'http',
-                repository: 'http://3.99.33.174:8081/repository/app1-release/',
-                version: '0.0.1-SNAPSHOT'
-            )
+        sh "${mvnCmd} deploy:deploy-file -Durl=http://3.99.33.174:8081 -Dfile=target/stockmanager-0.0.1-SNAPSHOT.jar -DgroupId=com.example -DartifactId=uk.co.danielbryant.djshopping -Dpackaging=jar -Dversion=0.0.1-SNAPSHOT -DrepositoryId=http://3.99.33.174:8081/repository/app1-release/
+"
         }
     }
 
