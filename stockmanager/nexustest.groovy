@@ -7,7 +7,6 @@ def mvnbuild(ENV) {
             withEnv(["PATH+MAVEN=/opt/apache-maven-3.9.5/bin"]) {
                 sh "${mvnCmd} clean package"
                 archiveJar()
-                publishToNexus()
             }
         }
     } else {
