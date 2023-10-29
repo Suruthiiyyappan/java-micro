@@ -42,7 +42,7 @@ def nexus() {
             protocol: "http",
             nexusUrl: "http://3.99.33.174:8081/repository/maven-snapshots",
             groupId: "uk.co.danielbryant.djshopping",
-            version: "${BUILD_NUMBER}",
+            version: "0.0.1-SNAPSHOT",
             repository: "maven-snapshots",
             credentialsId: "nexus3",
             artifacts: [
