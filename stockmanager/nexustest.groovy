@@ -29,7 +29,7 @@ def nexus() {
                     [
                         artifactId: 'stockmanager',
                         classifier: '',
-                        file: 'target/stockmanager-0.0.1-SNAPSHOT.jar',
+                        file: '**/target/stockmanager-0.0.1-SNAPSHOT.jar',
                         type: 'jar'
                     ]
                 ],
