@@ -19,24 +19,46 @@ def archiveJar() {
     archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
 }
 
-def publishToNexus() {
-        def nexusPublisher = NexusPublisher.newInstance()
+def nexus() {
+    // Read POM xml file using 'readMavenPom' step
+    pom = readMavenPom file: "pom.xml"
 
-        nexusPublisher.nexusUrl = 'http://3.99.33.174:8081/repository/maven-snapshots/' // Replace with your Nexus URL
-        nexusPublisher.nexusCredentialsId = 'nexus3' // Replace with your Nexus credentials ID
-        nexusPublisher.repositoryName = 'maven-snapshots' // Replace with your Nexus repository name
-        nexusPublisher.asset = [
-            [
-                groupId: 'uk.co.danielbryant.djshopping',
-                artifactId: 'stockmanager',
-                version: '0.0.1-SNAPSHOT',
-                packaging: 'jar',
-                file: 'target/stockmanager-0.0.1-SNAPSHOT.jar'
+    // Find built artifact under the target folder
+    filesByGlob = findFiles(glob: "target/*.jar")
+
+    // Print some info from the artifact found
+    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+
+    // Extract the path from the File found
+    artifactPath = filesByGlob[0].path
+
+    // Assign to a boolean response verifying if the artifact exists
+    artifactExists = fileExists artifactPath
+
+    if (artifactExists) {
+        echo "*** File: ${artifactPath}, group: uk.co.danielbryant.djshopping, packaging: jar, version: 0.0.1-SNAPSHOT"
+
+        nexusArtifactUploader(
+            nexusVersion: "nexus3",
+            protocol: "http",
+            nexusUrl: "http://3.99.33.174:8081/repository/maven-snapshots/",
+            groupId: "uk.co.danielbryant.djshopping",
+            version: "${BUILD_NUMBER}",
+            repository: "maven-snapshots",
+            credentialsId: "maven3",
+            artifacts: [
+                // Artifact generated such as .jar, .ear, and .war files.
+                [
+                    artifactId: "stockmanager", // Wrap artifactId in double quotes
+                    classifier: '',
+                    file: "target/stockmanager-0.0.1-SNAPSHOT.jar", // Wrap file path in double quotes
+                    type: "jar" // Wrap artifact type in double quotes
+                ]
             ]
-        ]
-        
-        nexusPublisher.perform()
+        )
+    }
 }
+
 return this
 
 // def nexus() {
