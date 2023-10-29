@@ -23,8 +23,20 @@ def nexus() {
 
     // Use withEnv to set the PATH environment variable
     withEnv(["PATH+MAVEN=/opt/apache-maven-3.9.5/bin"]) {
-        sh "${mvnCmd} deploy:deploy-file -Durl=http://3.99.33.174:8081 -Dfile=target/stockmanager-0.0.1-SNAPSHOT.jar -DgroupId=com.example -DartifactId=uk.co.danielbryant.djshopping -Dpackaging=jar -Dversion=0.0.1-SNAPSHOT -DrepositoryId=http://3.99.33.174:8081/repository/app1-release/"
+        withCredentials([usernamePassword(credentialsId: 'nexus3', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+            sh """
+                ${mvnCmd} deploy:deploy-file \
+                -Dfile=target/stockmanager-0.0.1-SNAPSHOT.jar \
+                -DartifactId=stockmanager \
+                -Dversion=0.0.1-SNAPSHOT \
+                -Dpackaging=jar \
+                -DrepositoryId=maven-snapshots \
+                -Durl=http://3.99.33.174:8081/repository/maven-snapshots/ \
+                -DgroupId=uk.co.danielbryant.djshopping
+            """
+        }
     }
-}    
+}
+
 
 return this
