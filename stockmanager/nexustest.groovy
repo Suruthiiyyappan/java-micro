@@ -23,7 +23,7 @@ def nexus() {
 
     // Use withEnv to set the PATH environment variable
     withEnv(["PATH+MAVEN=/opt/apache-maven-3.9.5/bin"]) {
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'mycreds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'nexus3', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
             sh """
                 ${mvnCmd} deploy:deploy-file \
                 -Dfile=target/stockmanager-0.0.1-SNAPSHOT.jar \
