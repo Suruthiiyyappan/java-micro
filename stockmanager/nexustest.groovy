@@ -44,7 +44,7 @@ def nexus() {
             groupId: "uk.co.danielbryant.djshopping",
             version: "${BUILD_NUMBER}",
             repository: "maven-snapshots",
-            credentialsId: "maven3",
+            credentialsId: "nexus3",
             artifacts: [
                 // Artifact generated such as .jar, .ear, and .war files.
                 [
