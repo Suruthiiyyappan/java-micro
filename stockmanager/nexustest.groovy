@@ -40,7 +40,7 @@ def nexus() {
         nexusArtifactUploader(
             nexusVersion: "nexus3",
             protocol: "http",
-            nexusUrl: "http://3.99.33.174:8081/repository/maven-snapshots/",
+            nexusUrl: "http://3.99.33.174:8081/repository/maven-snapshots",
             groupId: "uk.co.danielbryant.djshopping",
             version: "${BUILD_NUMBER}",
             repository: "maven-snapshots",
