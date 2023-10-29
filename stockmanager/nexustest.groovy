@@ -46,12 +46,11 @@ def nexus() {
             repository: "maven-snapshots",
             credentialsId: "nexus3",
             artifacts: [
-                // Artifact generated such as .jar, .ear, and .war files.
                 [
-                    artifactId: "stockmanager", // Wrap artifactId in double quotes
+                    artifactId: "stockmanager",
                     classifier: '',
-                    file: "target/stockmanager-0.0.1-SNAPSHOT.jar", // Wrap file path in double quotes
-                    type: "jar" // Wrap artifact type in double quotes
+                    file: "target/stockmanager-0.0.1-SNAPSHOT.jar",
+                    type: "jar"
                 ]
             ]
         )
