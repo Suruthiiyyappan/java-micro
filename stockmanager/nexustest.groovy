@@ -24,7 +24,6 @@ def nexus() {
 
     // Use withEnv to set the PATH environment variable
     withEnv(["PATH+MAVEN=/opt/apache-maven-3.9.5/bin"]) {
-        withSonarQubeEnv(credentialsId: 'nexus3') {
             nexusArtifactUploader(
                 artifacts: [
                     [
@@ -44,7 +43,7 @@ def nexus() {
             )
         }
     }
-}
+
     
 
 return this
