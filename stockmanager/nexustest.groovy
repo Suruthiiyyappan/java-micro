@@ -20,7 +20,6 @@ def archiveJar() {
 }
 
 def publishToNexus() {
-    script {
         def nexusPublisher = NexusPublisher.newInstance()
 
         nexusPublisher.nexusUrl = 'http://3.99.33.174:8081/repository/maven-snapshots/' // Replace with your Nexus URL
@@ -37,7 +36,6 @@ def publishToNexus() {
         ]
         
         nexusPublisher.perform()
-    }
 }
 return this
 
