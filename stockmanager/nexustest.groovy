@@ -33,8 +33,8 @@ def nexus() {
                 -DrepositoryId=maven-snapshots \
                 -Durl=http://3.99.33.174:8081/repository/maven-snapshots/ \
                 -DgroupId=uk.co.danielbryant.djshopping
-                -Dusername=$username
-                -Dpassword=$password
+                -Dusername=\$username
+                -Dpassword=\$password
             """
         }
     }
